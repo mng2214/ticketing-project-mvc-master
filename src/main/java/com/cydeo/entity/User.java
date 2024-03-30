@@ -1,37 +1,37 @@
 package com.cydeo.entity;
 
+import com.cydeo.dto.RoleDTO;
 import com.cydeo.enums.Gender;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 public class User extends BaseEntity {
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+    private String firstname;
+    private String lastname;
+    private String username;
     private String password;
-    private String confirmPassword;
-    private Gender gender;
-    private Role role;
     private boolean enabled;
+    private String phone;
+    private RoleDTO role;
+    private Gender gender;
 
-    public User(Long id, LocalDateTime insertDateTime, Long insertUserId, LocalDateTime lastUpdateDateTime, Long lastUpdateUserId, String firstName, String lastName, String email, String phoneNumber, String password, String confirmPassword, Gender gender, Role role, boolean enabled) {
+    public User(Long id, LocalDateTime insertDateTime, Long insertUserId, LocalDateTime lastUpdateDateTime, Long lastUpdateUserId, String firstname, String lastname, String username, String password, boolean enabled, String phone, RoleDTO role, Gender gender) {
         super(id, insertDateTime, insertUserId, lastUpdateDateTime, lastUpdateUserId);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
         this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.gender = gender;
-        this.role = role;
         this.enabled = enabled;
+        this.phone = phone;
+        this.role = role;
+        this.gender = gender;
     }
-
 }
