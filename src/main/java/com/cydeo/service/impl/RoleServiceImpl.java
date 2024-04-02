@@ -1,35 +1,34 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.service.RoleService;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
 @Controller
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements RoleService {
+
 
     @Override
     public RoleDTO save(RoleDTO object) {
-        return null;
+        return super.save(object.getId(), object);
     }
 
     @Override
     public List<RoleDTO> findAll() {
-        return null;
+        return super.findAll();
     }
 
     @Override
-    public RoleDTO findById(Long aLong) {
-        return null;
+    public RoleDTO findById(Long id) {
+        return super.findById(id);
     }
 
     @Override
-    public void delete(RoleDTO object) {
-
+    public void deleteById(Long id) {
+        super.deleteById(id);
     }
 
-    @Override
-    public void deleteById(Long aLong) {
-
-    }
 }
