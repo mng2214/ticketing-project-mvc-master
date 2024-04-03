@@ -57,6 +57,5 @@ public class DataGenerator implements CommandLineRunner {
         userService.save(user7);
         userService.save(user8);
 
-
     }
 }
