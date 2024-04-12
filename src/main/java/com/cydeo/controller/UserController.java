@@ -38,23 +38,17 @@ public class UserController {
 
     @GetMapping("/update/{username}")
     public String updateUser(@PathVariable("username") String username, Model model) {
-
-//        UserDTO userUpdate = userService.findById(username);
-//        RoleDTO roleUpdate = roleService.findById(userUpdate.getRole().getId());
-//        List<UserDTO> allUsersUpdate = userService.findAll();
-
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user", userService.findById(username));
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("users", userService.findAll());
-
         return "user/update";
     }
 
-//    @PostMapping("/update/{username}")
-//    public String updateUser1(@PathVariable("username") String username, Model model) {
-//
-//        return "user/update";
-//    }
+    @PostMapping("/update")
+    public String updatedUser(UserDTO user) {
+        userService.update(user);
+        return "redirect:/user/create";
+    }
 
 
 }
