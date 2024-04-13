@@ -4,7 +4,6 @@ import com.cydeo.dto.TaskDTO;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +30,7 @@ public class TaskController {
         model.addAttribute("task", new TaskDTO());
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("tasks", taskService.findAll());
         return "task/create";
     }
 
@@ -39,4 +39,6 @@ public class TaskController {
         taskService.save(task);
         return "redirect:/task/create";
     }
+
+
 }

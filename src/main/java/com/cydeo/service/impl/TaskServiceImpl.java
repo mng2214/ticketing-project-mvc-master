@@ -16,7 +16,7 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
     public TaskDTO save(TaskDTO object) {
 
         if(object.getId() == null){
-            object.setId((long) new Random().nextInt(1000));
+            object.setId(generateRandomId());
         }
 
         if(object.getAssignedDate() == null){
@@ -47,5 +47,9 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
     @Override
     public TaskDTO findById(Long id) {
         return super.findById(id);
+    }
+
+    private Long generateRandomId() {
+        return (long) (new Random().nextInt(1000) + 1);
     }
 }

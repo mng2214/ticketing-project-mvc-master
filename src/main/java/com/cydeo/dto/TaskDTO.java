@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class TaskDTO {
     private Long id;
@@ -21,4 +20,13 @@ public class TaskDTO {
     private LocalDate assignedDate;
     private Status taskStatus;
 
+    public TaskDTO(Long id, ProjectDTO project, UserDTO assignedEmployee, String taskSubject, String taskDetail, LocalDate assignedDate, Status taskStatus) {
+        this.id = id;
+        this.project = project;
+        this.assignedEmployee = assignedEmployee;
+        this.taskSubject = taskSubject;
+        this.taskDetail = taskDetail;
+        this.assignedDate = assignedDate;
+        this.taskStatus = taskStatus;
+    }
 }
