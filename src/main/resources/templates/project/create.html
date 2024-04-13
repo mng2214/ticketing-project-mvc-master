@@ -32,7 +32,7 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form th:object="${project}">
+                                    <form th:action="@{/user/create}" th:object="${project}" method="post">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -53,8 +53,9 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Assigned Manager</label>
-                                                    <select name="assignedmanager" class="custom-select">
-                                                        <option></option>
+                                                    <select th:field="*{assignedManager}" class="custom-select">
+                                                        <option th:value= "''" th:text="Select"></option>
+                                                        <option th:each="manager : ${managers}" th:value="${manager.username}" th:text="${manager.firstname + ' ' + manager.lastname}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -126,7 +127,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
+                                            <tr th:each="">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
