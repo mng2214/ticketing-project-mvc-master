@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements RoleService {
 
-
     @Override
     public RoleDTO save(RoleDTO object) {
         return super.save(object.getId(), object);
