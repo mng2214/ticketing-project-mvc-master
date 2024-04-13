@@ -38,4 +38,10 @@ public class ProjectController {
         return "redirect:/project/create";
     }
 
+    @GetMapping("/complete/{projectCode}")
+    public String completeProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectService.findById(projectCode));
+        return "redirect:/project/create";
+    }
+
 }
