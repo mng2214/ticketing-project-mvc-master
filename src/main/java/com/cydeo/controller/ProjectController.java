@@ -2,12 +2,15 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.UserDTO;
+import com.cydeo.enums.Status;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.stream.Collectors;
@@ -29,6 +32,12 @@ public class ProjectController {
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("managers", userService.findAll());
         return "/project/create";
+    }
+
+    @PostMapping("/create")
+    public String saveProject(@ModelAttribute("project") ProjectDTO projectDTO) {
+        projectService.save(projectDTO);
+        return "redirect:/project/create";
     }
 
 }
