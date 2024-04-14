@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="/fragments/head :: head"></head>
+<head th:replace="/fragments/head :: head">
+    <title>Ticketing Project</title></head>
 
 <body>
 <div class="splash-container">
@@ -14,11 +15,11 @@
             <form th:action="@{/welcome}">
                 <div class="form-group">
                     <label for="username">Email</label>:
-                    <input type="text" id="username" name="username" class="form-control" placeholder="username"/>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="security layer is not set up"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>:
-                    <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="just click login :)"/>
                 </div>
                 <div class="form-group">
                     <label class="custom-control custom-checkbox">
