@@ -58,4 +58,10 @@ public class ProjectController {
         return "redirect:/project/create";
     }
 
+    @GetMapping("/update")
+    public String projectStatusUpdate(Model model){
+
+        return "/task/status-update";
+    }
+
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -20,8 +21,8 @@ public class TaskDTO {
     private LocalDate assignedDate;
     private Status taskStatus;
 
-    public TaskDTO(Long id, ProjectDTO project, UserDTO assignedEmployee, String taskSubject, String taskDetail, LocalDate assignedDate, Status taskStatus) {
-        this.id = id;
+    public TaskDTO(ProjectDTO project, UserDTO assignedEmployee, String taskSubject, String taskDetail, LocalDate assignedDate, Status taskStatus) {
+        this.id = UUID.randomUUID().getMostSignificantBits();
         this.project = project;
         this.assignedEmployee = assignedEmployee;
         this.taskSubject = taskSubject;
