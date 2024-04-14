@@ -47,17 +47,12 @@ public class TaskController {
     }
 
 
-
-
-
     @GetMapping("/update/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, Model model) {
-
         model.addAttribute("task", taskService.findById(taskId));
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("employees", userService.findEmployees());
         model.addAttribute("tasks", taskService.findAll());
-
         return "task/update";
 
     }
@@ -76,10 +71,6 @@ public class TaskController {
     }
 
 
-
-
-
-
     @GetMapping("/employee/pending-tasks")
     public String employeePendingTasks(Model model) {
         model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
@@ -88,13 +79,11 @@ public class TaskController {
 
     @GetMapping("/employee/edit/{id}")
     public String employeeEditTask(@PathVariable("id") Long id, Model model) {
-
         model.addAttribute("task", taskService.findById(id));
         model.addAttribute("employees", userService.findEmployees());
         model.addAttribute("projects", projectService.findAllNonCompletedProjects());
         model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
         model.addAttribute("statuses", Status.values());
-
         return "task/status-update";
 
     }

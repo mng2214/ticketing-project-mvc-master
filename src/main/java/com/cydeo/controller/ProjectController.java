@@ -1,11 +1,14 @@
 package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/project")
@@ -60,8 +63,21 @@ public class ProjectController {
 
     @GetMapping("/update")
     public String projectStatusUpdate(Model model){
-
         return "/task/status-update";
+    }
+
+    @GetMapping("/manager/project-status")
+    public String getProjectByManager(Model model){
+        UserDTO manager = userService.findById("artur@gmail.com"); // Will be replaced when ORM added
+        List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
+        model.addAttribute("projects",projects);
+        return "/manager/project-status";
+    }
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectService.findById(projectCode));
+        return "redirect:/project/manager/project-status";
     }
 
 }
