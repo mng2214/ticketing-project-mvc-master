@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="/fragments/head :: head"></head>
+<head th:replace="/fragments/head :: head"><title>Pending Task</title></head>
 
 <body>
 
@@ -44,7 +44,7 @@
                                             <tr th:each="task : ${tasks}">
                                                 <td th:text="${task.project.projectCode +'-'+task.project.projectName}"></td>
                                                 <td th:text="${task.taskSubject}"></td>
-                                                <td th:text="${task.assignedEmployee.firstName +' '+ task.assignedEmployee.lastName}"></td>
+                                                <td th:text="${task.assignedEmployee.firstname +' '+ task.assignedEmployee.lastname}"></td>
                                                 <td th:text="${#temporals.format(task.assignedDate, 'MM/dd/yyyy')}"></td>
                                                 <td th:text="${task.taskStatus.value}"></td>
                                                 <td>
