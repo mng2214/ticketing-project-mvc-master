@@ -1,12 +1,9 @@
 package com.cydeo.service.impl;
 
-import org.thymeleaf.util.MapUtils;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public abstract class AbstractMapService<T, ID> {
 
