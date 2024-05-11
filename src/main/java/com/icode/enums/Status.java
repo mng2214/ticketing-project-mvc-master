@@ -1,4 +1,4 @@
-package com.cydeo.enums;
+package com.icode.enums;
 
 public enum Status {
     OPEN("Open"),

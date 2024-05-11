@@ -1,4 +1,4 @@
-package com.cydeo.entity;
+package com.icode.entity;
 
 import lombok.*;
 

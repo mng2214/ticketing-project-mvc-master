@@ -1,11 +1,9 @@
-package com.cydeo.entity;
+package com.icode.entity;
 
-import com.cydeo.dto.RoleDTO;
-import com.cydeo.enums.Gender;
+import com.icode.enums.Gender;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 
 @EqualsAndHashCode(callSuper = true)

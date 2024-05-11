@@ -1,14 +1,11 @@
-package com.cydeo.controller;
+package com.icode.controller;
 
-import com.cydeo.dto.RoleDTO;
-import com.cydeo.dto.UserDTO;
-import com.cydeo.service.RoleService;
-import com.cydeo.service.UserService;
+import com.icode.dto.UserDTO;
+import com.icode.service.RoleService;
+import com.icode.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -25,8 +22,8 @@ public class UserController {
     @GetMapping("/create")
     public String createUser(Model model) {
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("roles", roleService.listOfAllRoles());
+        model.addAttribute("users", userService.listOfAllUsers());
         return "/user/create";
     }
 //

@@ -1,11 +1,7 @@
-package com.cydeo.service;
+package com.icode.service;
 
-import com.cydeo.dto.UserDTO;
-import com.cydeo.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.icode.dto.UserDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
