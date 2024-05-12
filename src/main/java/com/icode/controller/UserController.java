@@ -5,7 +5,10 @@ import com.icode.service.RoleService;
 import com.icode.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -26,12 +29,23 @@ public class UserController {
         model.addAttribute("users", userService.listOfAllUsers());
         return "/user/create";
     }
-//
-//    @PostMapping("/create")
-//    public String insertUser(@ModelAttribute("user") UserDTO userDTO) {
-//        userService.save(userDTO);
-//        return "redirect:/user/create";
-//    }
+
+    @PostMapping("/create")
+    public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("roles", roleService.listOfAllRoles());
+            model.addAttribute("users", userService.listOfAllUsers());
+
+            return "/user/create";
+
+        }
+
+        userService.saveUser(user);
+        return "redirect:/user/create";
+
+    }
 //
 //    @GetMapping("/update/{username}")
 //    public String updateUser(@PathVariable("username") String username, Model model) {

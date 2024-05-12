@@ -6,7 +6,6 @@ import com.icode.mapper.RoleMapper;
 import com.icode.repository.RoleRepository;
 import com.icode.service.RoleService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,7 +29,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDTO fineById(Long id) {
-        return null;
+        Optional<Role> byId = roleRepository.findById(id);
+        return byId.map(roleMapper::convertToDto).orElse(null);
     }
 
 }
