@@ -2,13 +2,15 @@ package com.icode.service.impl;
 
 import com.icode.dto.UserDTO;
 import com.icode.service.UserService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listOfAllUsers() {
-        return List.of();
+        return null;
     }
 
     @Override
