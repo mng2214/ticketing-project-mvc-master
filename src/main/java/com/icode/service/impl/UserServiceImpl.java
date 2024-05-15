@@ -6,6 +6,7 @@ import com.icode.mapper.UserMapper;
 import com.icode.repository.UserRepository;
 import com.icode.service.UserService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO fineByUserName(String username) {
-        return null;
+        User byUsername = userRepository.findByUsername(username);
+        return userMapper.toUserDTO(byUsername);
     }
 
     @Override
@@ -38,12 +40,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO userDTO) {
-        return null;
+        userRepository.save(userMapper.toUser(userDTO));
+        return userDTO;
     }
 
     @Override
     public void deleteByUserName(String username) {
-
+        User user = userMapper.toUser(fineByUserName(username));
+        userRepository.delete(user);
     }
 
 }
