@@ -5,7 +5,9 @@ import com.icode.entity.User;
 import com.icode.mapper.UserMapper;
 import com.icode.repository.UserRepository;
 import com.icode.service.UserService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listOfAllUsers() {
-        List<User> allUsers = userRepository.findAll();
+        List<User> allUsers = userRepository.findAll(Sort.by("firstname"));
         return allUsers.stream().map(userMapper::toUserDTO).collect(Collectors.toList());
     }
 
@@ -40,14 +42,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO userDTO) {
-        userRepository.save(userMapper.toUser(userDTO));
+        User user = userRepository.findByUsername(userDTO.getUsername());
+        User converteduser = userMapper.toUser(userDTO);
+        converteduser.setId(user.getId());
+        userRepository.save(converteduser);
         return userDTO;
     }
 
     @Override
     public void deleteByUserName(String username) {
-        User user = userMapper.toUser(fineByUserName(username));
-        userRepository.delete(user);
+        userRepository.deleteByUsername(username);
+    }
+
+    @Override
+    public void delete(String username) {
+        User user = userRepository.findByUsername(username);
+        user.setIsDeleted(true);
+        userRepository.save(user);
     }
 
 }

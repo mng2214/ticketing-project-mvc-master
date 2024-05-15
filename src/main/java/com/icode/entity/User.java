@@ -2,9 +2,8 @@ package com.icode.entity;
 
 import com.icode.enums.Gender;
 import lombok.*;
-
+import org.hibernate.annotations.Where;
 import javax.persistence.*;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -12,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+@Where(clause = "is_deleted=false")
 public class User extends BaseEntity {
 
     private String firstname;

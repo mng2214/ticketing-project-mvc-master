@@ -2,6 +2,7 @@ package com.icode.service;
 
 import com.icode.dto.UserDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface UserService {
 
     void deleteByUserName(String username);
 
+    void delete (String username);
 }
