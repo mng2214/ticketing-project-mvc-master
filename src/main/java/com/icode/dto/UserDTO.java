@@ -2,7 +2,6 @@ package com.icode.dto;
 
 import com.icode.enums.Gender;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 

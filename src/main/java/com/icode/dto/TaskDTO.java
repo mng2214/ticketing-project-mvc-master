@@ -13,6 +13,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class TaskDTO {
+
     private Long id;
 
     @NotNull
@@ -28,6 +29,7 @@ public class TaskDTO {
     private String taskDetail;
 
     private Status taskStatus;
+
     private LocalDate assignedDate;
 
     public TaskDTO(ProjectDTO project, UserDTO assignedEmployee, String taskSubject, String taskDetail, Status taskStatus, LocalDate assignedDate) {
