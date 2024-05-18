@@ -19,5 +19,19 @@ public class BaseEntity {
     private LocalDateTime lastUpdateDateTime;
     private Long lastUpdateUserId;
 
-    private Boolean isDeleted = false;
+    private Boolean isDeleted = false; // soft delete
+
+    @PrePersist
+    public void onPrePersist() {
+        this.insertDateTime = LocalDateTime.now();
+        this.lastUpdateDateTime = LocalDateTime.now();
+        this.insertUserId = 1L;
+        this.lastUpdateUserId = 1L;
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.lastUpdateDateTime = LocalDateTime.now();
+        this.lastUpdateUserId = 1L;
+    }
 }

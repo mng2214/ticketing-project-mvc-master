@@ -14,10 +14,10 @@ import javax.persistence.*;
 @Where(clause = "is_deleted=false")
 public class User extends BaseEntity {
 
-    private String firstname;
-    private String lastname;
-    private String username;
-    private String password;
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String passWord;
     private boolean enabled;
     private String phone;
 

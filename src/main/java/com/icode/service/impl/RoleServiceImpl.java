@@ -1,13 +1,11 @@
 package com.icode.service.impl;
 
 import com.icode.dto.RoleDTO;
-import com.icode.entity.Role;
 import com.icode.mapper.RoleMapper;
 import com.icode.repository.RoleRepository;
 import com.icode.service.RoleService;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,15 +20,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleDTO> listOfAllRoles() {
-        List<Role> roleList = roleRepository.findAll();
-        return roleList.stream().map(roleMapper::convertToDto).collect(Collectors.toList());
+    public List<RoleDTO> listAllRoles() {
+        return roleRepository.findAll().stream().map(roleMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public RoleDTO fineById(Long id) {
-        Optional<Role> byId = roleRepository.findById(id);
-        return byId.map(roleMapper::convertToDto).orElse(null);
+    public RoleDTO findById(Long id) {
+        return roleMapper.convertToDto(roleRepository.findById(id).get());
     }
 
 }

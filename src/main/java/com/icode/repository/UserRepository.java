@@ -10,10 +10,12 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    User findByUsername(String username);
+    User findByUserName(String username);
 
     @Transactional
-    void deleteByUsername(String username);
+    void deleteByUserName(String username);
+
+    List<User> findAllByRoleDescriptionIgnoreCase(String description);
 
 
 

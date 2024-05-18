@@ -23,6 +23,6 @@ class RoleDtoConverter implements Converter<String, RoleDTO> {
         if (source.isEmpty()) {
             return null;
         }
-        return roleService.fineById(Long.parseLong(source));
+        return roleService.findById(Long.parseLong(source));
     }
 }
