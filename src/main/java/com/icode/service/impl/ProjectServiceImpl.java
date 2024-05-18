@@ -2,6 +2,7 @@ package com.icode.service.impl;
 
 import com.icode.dto.ProjectDTO;
 import com.icode.entity.Project;
+import com.icode.enums.Status;
 import com.icode.mapper.ProjectMapper;
 import com.icode.repository.ProjectRepository;
 import com.icode.service.ProjectService;
@@ -22,7 +23,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO getByProjectCode(String code) {
-        return null;
+        Project byProjectCode = projectRepository.findByProjectCode(code);
+        return projectMapper.convertToDto(byProjectCode);
     }
 
     @Override
@@ -33,7 +35,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void save(ProjectDTO project) {
-
+        project.setProjectStatus(Status.OPEN);
+        Project savedProject = projectRepository.save(projectMapper.convertToEntity(project));
+        projectRepository.save(savedProject);
     }
 
     @Override
@@ -42,8 +46,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(ProjectDTO project) {
+    public void delete(String projectCode) {
+        Project projectToDelete = projectRepository.findByProjectCode(projectCode);
+        projectToDelete.setIsDeleted(true);
+        projectRepository.save(projectToDelete);
+    }
 
+    @Override
+    public void complete(String projectCode) {
+        Project projectToComplete = projectRepository.findByProjectCode(projectCode);
+        projectToComplete.setProjectStatus(Status.COMPLETE);
+        projectRepository.save(projectToComplete);
     }
 
 }
