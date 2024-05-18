@@ -1,9 +1,7 @@
 package com.icode.mapper;
 
 import com.icode.dto.ProjectDTO;
-import com.icode.dto.RoleDTO;
 import com.icode.entity.Project;
-import com.icode.entity.Role;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +15,12 @@ public class ProjectMapper {
     }
 
     // convert to entity
-    public Project convertToEntity(RoleDTO roleDto) {
+    public Project convertToEntity(ProjectDTO roleDto) {
         return modelMapper.map(roleDto, Project.class);
     }
 
     // convert to dto
-    public ProjectDTO convertToDto(Role roleEntity) {
+    public ProjectDTO convertToDto(Project roleEntity) {
         return modelMapper.map(roleEntity, ProjectDTO.class);
     }
 

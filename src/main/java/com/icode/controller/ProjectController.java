@@ -1,29 +1,31 @@
 package com.icode.controller;
 
+import com.icode.dto.ProjectDTO;
+import com.icode.service.ProjectService;
+import com.icode.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-//    ProjectService projectService;
-//    UserService userService;
-//
-//    public ProjectController(ProjectService projectService, UserService userService) {
-//        this.projectService = projectService;
-//        this.userService = userService;
-//    }
-//
-//    @GetMapping("/create")
-//    public String createProject(Model model) {
-//        model.addAttribute("project", new ProjectDTO());
-//        model.addAttribute("projects", projectService.findAll());
-//        model.addAttribute("managers", userService.findManagers());
-//        return "/project/create";
-//    }
+
+    ProjectService projectService;
+    UserService userService;
+
+    public ProjectController(ProjectService projectService, UserService userService) {
+        this.projectService = projectService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/create")
+    public String createProject(Model model) {
+        model.addAttribute("project", new ProjectDTO());
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.findManagers());
+        return "/project/create";
+    }
 //
 //    @PostMapping("/create")
 //    public String saveProject(@ModelAttribute("project") ProjectDTO projectDTO) {
