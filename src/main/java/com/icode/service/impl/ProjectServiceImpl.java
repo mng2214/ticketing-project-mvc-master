@@ -2,6 +2,7 @@ package com.icode.service.impl;
 
 import com.icode.dto.ProjectDTO;
 import com.icode.entity.Project;
+import com.icode.entity.User;
 import com.icode.enums.Status;
 import com.icode.mapper.ProjectMapper;
 import com.icode.repository.ProjectRepository;
@@ -41,8 +42,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void update(ProjectDTO project) {
-
+    public void update(ProjectDTO dto) {
+        Project project = projectRepository.findByProjectCode(dto.getProjectCode());
+        Project convertedProject = projectMapper.convertToEntity(dto);
+        convertedProject.setId(project.getId());
+        convertedProject.setProjectStatus(project.getProjectStatus());
+        projectRepository.save(convertedProject);
     }
 
     @Override
