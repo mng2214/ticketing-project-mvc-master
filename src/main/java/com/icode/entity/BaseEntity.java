@@ -14,11 +14,15 @@ public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(updatable = false, nullable = false)
     private LocalDateTime insertDateTime;
+
     @Column(updatable = false, nullable = false)
     private Long insertUserId;
+
     private LocalDateTime lastUpdateDateTime;
+
     private Long lastUpdateUserId;
 
     private Boolean isDeleted = false; // soft delete

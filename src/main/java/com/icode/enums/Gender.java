@@ -1,6 +1,7 @@
 package com.icode.enums;
 
 public enum Gender {
+
     MALE("Male"),
     FEMALE("Female");
 
@@ -9,7 +10,6 @@ public enum Gender {
     Gender(String value) {
         this.value = value;
     }
-
     public String getValue() {
         return value;
     }
