@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Where(clause = "is_deleted=false")
-
 public class Project extends BaseEntity {
 
     @Column(unique = true)
