@@ -66,8 +66,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void delete(String projectCode) {
+
         Project projectToDelete = projectRepository.findByProjectCode(projectCode);
         projectToDelete.setIsDeleted(true);
+
+        List<Task> tasksBelongsToProject = taskService.taskBelongsToProject(projectCode);
+        tasksBelongsToProject.forEach(p->p.setIsDeleted(true));
+
         projectRepository.save(projectToDelete);
     }
 

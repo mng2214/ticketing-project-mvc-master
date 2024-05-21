@@ -1,6 +1,7 @@
 package com.icode.service;
 
 import com.icode.dto.TaskDTO;
+import com.icode.entity.Task;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface TaskService {
     int totalNonCompletedTask(String projectCode);
 
     int totalCompletedTask(String projectCode);
+
+    List<Task> taskBelongsToProject(String projectCode);
 }

@@ -8,6 +8,7 @@ import com.icode.repository.TaskRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +55,7 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> task = taskRepository.findById(dto.getId());
         Task convertedTask = taskMapper.convertToEntity(dto);
 
-        if(task.isPresent()){
+        if (task.isPresent()) {
             convertedTask.setId(task.get().getId());
             convertedTask.setTaskStatus(task.get().getTaskStatus());
             convertedTask.setAssignedDate(task.get().getAssignedDate());
@@ -73,5 +74,9 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.totalCompletedTask(projectCode);
     }
 
+    @Override
+    public List<Task> taskBelongsToProject(String projectCode) {
+        return taskRepository.findAllByProjectCode(projectCode);
+    }
 
 }
