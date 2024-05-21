@@ -1,16 +1,13 @@
 package com.icode.service.impl;
 
 import com.icode.dto.TaskDTO;
-import com.icode.entity.Project;
 import com.icode.entity.Task;
-import com.icode.entity.User;
 import com.icode.enums.Status;
 import com.icode.mapper.TaskMapper;
 import com.icode.repository.TaskRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -52,17 +49,28 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(TaskDTO taskDTO) {
+    public void update(TaskDTO dto) {
 
-        Optional<Task> task = taskRepository.findById(taskDTO.getId());
-        Task updatedTask = taskMapper.convertToEntity(taskDTO);
+        Optional<Task> task = taskRepository.findById(dto.getId());
+        Task convertedTask = taskMapper.convertToEntity(dto);
 
-        if (task.isPresent()) {
-            updatedTask.setId(task.get().getId());
-            updatedTask.setTaskStatus(taskDTO.getTaskStatus());
-            updatedTask.setAssignedDate(taskDTO.getAssignedDate());
-            taskRepository.save(updatedTask);
+        if(task.isPresent()){
+            convertedTask.setId(task.get().getId());
+            convertedTask.setTaskStatus(task.get().getTaskStatus());
+            convertedTask.setAssignedDate(task.get().getAssignedDate());
+            taskRepository.save(convertedTask);
         }
+
+    }
+
+    @Override
+    public int totalNonCompletedTask(String projectCode) {
+        return taskRepository.totalNonCompletedTasks(projectCode);
+    }
+
+    @Override
+    public int totalCompletedTask(String projectCode) {
+        return taskRepository.totalCompletedTask(projectCode);
     }
 
 

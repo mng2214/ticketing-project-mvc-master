@@ -16,4 +16,7 @@ public interface TaskService {
 
     void update(TaskDTO taskDTO );
 
+    int totalNonCompletedTask(String projectCode);
+
+    int totalCompletedTask(String projectCode);
 }
