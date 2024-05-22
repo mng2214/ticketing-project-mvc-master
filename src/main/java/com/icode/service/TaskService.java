@@ -25,4 +25,6 @@ public interface TaskService {
 //    List<Task> taskBelongsToProject(String projectCode);
 
     void deleteByProject(ProjectDTO projectDTO);
+
+    void completeByProject(ProjectDTO projectDTO);
 }

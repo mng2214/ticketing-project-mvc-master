@@ -10,6 +10,7 @@ import com.icode.repository.TaskRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +60,7 @@ public class TaskServiceImpl implements TaskService {
 
         if (task.isPresent()) {
             convertedTask.setId(task.get().getId());
-            convertedTask.setTaskStatus(task.get().getTaskStatus());
+            convertedTask.setTaskStatus(dto.getTaskStatus() == null ? task.get().getTaskStatus() : dto.getTaskStatus());
             convertedTask.setAssignedDate(task.get().getAssignedDate());
             taskRepository.save(convertedTask);
         }
@@ -87,11 +88,19 @@ public class TaskServiceImpl implements TaskService {
         list.forEach(task -> delete(task.getId()));
     }
 
+    @Override
+    public void completeByProject(ProjectDTO projectDTO) {
+        List<TaskDTO> list = listAllByProject(projectDTO);
+        list.forEach(task -> {
+            task.setTaskStatus(Status.COMPLETE);
+            update(task);
+        });
+    }
+
     private List<TaskDTO> listAllByProject(ProjectDTO projectDTO) {
         List<Task> list = taskRepository.findAllByProject(projectMapper.convertToEntity(projectDTO));
         return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
-
 
 
 }
