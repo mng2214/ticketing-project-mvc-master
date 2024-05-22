@@ -1,5 +1,6 @@
 package com.icode.repository;
 
+import com.icode.dto.ProjectDTO;
 import com.icode.entity.Project;
 import com.icode.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,4 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Project findByProjectCode(String code);
 
     List<Project> findAllByAssignedManager(User user);
-
 }

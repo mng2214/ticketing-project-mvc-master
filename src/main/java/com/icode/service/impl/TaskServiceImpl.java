@@ -2,6 +2,7 @@ package com.icode.service.impl;
 
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
+import com.icode.entity.Project;
 import com.icode.entity.Task;
 import com.icode.entity.User;
 import com.icode.enums.Status;
@@ -120,6 +121,12 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDTO> listAllTasksByStatus(Status status) {
         User assignedEmployee = userRepository.findByUserName("john@employee.com");  // hardcoded now until security is implemented
         List<Task> list = taskRepository.findAllByTaskStatusAndAssignedEmployee(status, assignedEmployee);
+        return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> readAllByAssignedEmployee(User assignedEmployee) {
+        List<Task> list = taskRepository.findAllByAssignedEmployee(assignedEmployee);
         return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 

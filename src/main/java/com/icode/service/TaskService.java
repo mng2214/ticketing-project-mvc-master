@@ -3,6 +3,7 @@ package com.icode.service;
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.entity.Task;
+import com.icode.entity.User;
 import com.icode.enums.Status;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface TaskService {
     void updateStatus(TaskDTO task);
 
     List<TaskDTO> listAllTasksByStatus(Status status);
+
+    List<TaskDTO> readAllByAssignedEmployee(User user);
 }

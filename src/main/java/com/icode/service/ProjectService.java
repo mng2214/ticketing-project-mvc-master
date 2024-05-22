@@ -1,6 +1,8 @@
 package com.icode.service;
 
 import com.icode.dto.ProjectDTO;
+import com.icode.entity.User;
+
 import java.util.List;
 
 public interface ProjectService {
@@ -19,5 +21,5 @@ public interface ProjectService {
 
     List<ProjectDTO> listAllProjectDetails();
 
-
+    List<ProjectDTO> readAllByAssignedManager(User user);
 }
