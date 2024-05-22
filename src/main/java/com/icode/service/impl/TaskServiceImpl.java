@@ -2,7 +2,6 @@ package com.icode.service.impl;
 
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
-import com.icode.entity.Project;
 import com.icode.entity.Task;
 import com.icode.entity.User;
 import com.icode.enums.Status;
@@ -13,7 +12,6 @@ import com.icode.repository.UserRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

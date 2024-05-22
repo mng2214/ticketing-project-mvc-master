@@ -3,11 +3,8 @@ package com.icode.service.impl;
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.dto.UserDTO;
-import com.icode.entity.Project;
 import com.icode.entity.User;
-import com.icode.mapper.ProjectMapper;
 import com.icode.mapper.UserMapper;
-import com.icode.repository.ProjectRepository;
 import com.icode.repository.UserRepository;
 import com.icode.service.ProjectService;
 import com.icode.service.TaskService;
@@ -15,7 +12,6 @@ import com.icode.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
