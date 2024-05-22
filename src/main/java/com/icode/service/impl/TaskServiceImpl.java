@@ -1,14 +1,15 @@
 package com.icode.service.impl;
 
+import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.entity.Task;
 import com.icode.enums.Status;
+import com.icode.mapper.ProjectMapper;
 import com.icode.mapper.TaskMapper;
 import com.icode.repository.TaskRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +19,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-    TaskRepository taskRepository;
-    TaskMapper taskMapper;
+    private final ProjectMapper projectMapper;
+    private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
     @Override
     public TaskDTO findById(Long id) {
@@ -74,9 +76,22 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.totalCompletedTask(projectCode);
     }
 
+//    @Override
+//    public List<Task> taskBelongsToProject(String projectCode) {
+//        return taskRepository.findAllByProjectCode(projectCode);
+//    }
+
     @Override
-    public List<Task> taskBelongsToProject(String projectCode) {
-        return taskRepository.findAllByProjectCode(projectCode);
+    public void deleteByProject(ProjectDTO projectDTO) {
+        List<TaskDTO> list = listAllByProject(projectDTO);
+        list.forEach(task -> delete(task.getId()));
     }
+
+    private List<TaskDTO> listAllByProject(ProjectDTO projectDTO) {
+        List<Task> list = taskRepository.findAllByProject(projectMapper.convertToEntity(projectDTO));
+        return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+
 
 }

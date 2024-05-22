@@ -69,9 +69,12 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project projectToDelete = projectRepository.findByProjectCode(projectCode);
         projectToDelete.setIsDeleted(true);
+        projectToDelete.setProjectCode(projectToDelete.getProjectCode() + "-" + projectToDelete.getId());
 
-        List<Task> tasksBelongsToProject = taskService.taskBelongsToProject(projectCode);
-        tasksBelongsToProject.forEach(p->p.setIsDeleted(true));
+//        List<Task> tasksBelongsToProject = taskService.taskBelongsToProject(projectCode);
+//        tasksBelongsToProject.forEach(p -> p.setIsDeleted(true));
+
+        taskService.deleteByProject(projectMapper.convertToDto(projectToDelete));
 
         projectRepository.save(projectToDelete);
     }
@@ -92,12 +95,12 @@ public class ProjectServiceImpl implements ProjectService {
 
         return list.stream().map(p -> {
 
-           ProjectDTO obj = projectMapper.convertToDto(p);
+            ProjectDTO obj = projectMapper.convertToDto(p);
 
-           obj.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(p.getProjectCode()));
-           obj.setCompleteTaskCounts(taskService.totalCompletedTask(p.getProjectCode()));
+            obj.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(p.getProjectCode()));
+            obj.setCompleteTaskCounts(taskService.totalCompletedTask(p.getProjectCode()));
 
-           return obj;
+            return obj;
 
         }).collect(Collectors.toList());
     }

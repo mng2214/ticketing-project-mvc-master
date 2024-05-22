@@ -1,5 +1,6 @@
 package com.icode.repository;
 
+import com.icode.entity.Project;
 import com.icode.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +23,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             nativeQuery = true)
     int totalCompletedTask(String projectCode);
 
-    @Query("select t from Task t where t.project.projectCode = ?1")
-    List<Task> findAllByProjectCode(String projectCode);
+//    @Query("select t from Task t where t.project.projectCode = ?1")
+//    List<Task> findAllByProjectCode(String projectCode);
+
+    List<Task> findAllByProject(Project project);
 }

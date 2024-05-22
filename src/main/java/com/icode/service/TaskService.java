@@ -1,5 +1,6 @@
 package com.icode.service;
 
+import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.entity.Task;
 
@@ -21,5 +22,7 @@ public interface TaskService {
 
     int totalCompletedTask(String projectCode);
 
-    List<Task> taskBelongsToProject(String projectCode);
+//    List<Task> taskBelongsToProject(String projectCode);
+
+    void deleteByProject(ProjectDTO projectDTO);
 }
