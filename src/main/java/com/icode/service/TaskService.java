@@ -3,6 +3,7 @@ package com.icode.service;
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.entity.Task;
+import com.icode.enums.Status;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface TaskService {
 
     void delete(Long id);
 
-    void update(TaskDTO taskDTO );
+    void update(TaskDTO taskDTO);
 
     int totalNonCompletedTask(String projectCode);
 
@@ -27,4 +28,8 @@ public interface TaskService {
     void deleteByProject(ProjectDTO projectDTO);
 
     void completeByProject(ProjectDTO projectDTO);
+
+    List<TaskDTO> listAllTasksByStatusIsNot(Status status);
+
+    void updateStatus(TaskDTO task);
 }

@@ -3,10 +3,12 @@ package com.icode.service.impl;
 import com.icode.dto.ProjectDTO;
 import com.icode.dto.TaskDTO;
 import com.icode.entity.Task;
+import com.icode.entity.User;
 import com.icode.enums.Status;
 import com.icode.mapper.ProjectMapper;
 import com.icode.mapper.TaskMapper;
 import com.icode.repository.TaskRepository;
+import com.icode.repository.UserRepository;
 import com.icode.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class TaskServiceImpl implements TaskService {
     private final ProjectMapper projectMapper;
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final UserRepository userRepository;
 
     @Override
     public TaskDTO findById(Long id) {
@@ -95,6 +98,22 @@ public class TaskServiceImpl implements TaskService {
             task.setTaskStatus(Status.COMPLETE);
             update(task);
         });
+    }
+
+    @Override
+    public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
+        User loggedInUser = userRepository.findByUserName("john@employee.com");  // hardcoded now until security is implemented
+        List<Task> list = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, loggedInUser);
+        return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateStatus(TaskDTO dto) {
+        Optional<Task> task = taskRepository.findById(dto.getId());
+        if (task.isPresent()) {
+            task.get().setTaskStatus(dto.getTaskStatus());
+            taskRepository.save(task.get());
+        }
     }
 
     private List<TaskDTO> listAllByProject(ProjectDTO projectDTO) {
