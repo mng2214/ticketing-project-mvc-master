@@ -12,6 +12,7 @@ import com.icode.repository.UserRepository;
 import com.icode.service.ProjectService;
 import com.icode.service.TaskService;
 import com.icode.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private final ProjectService projectService;
     private final TaskService taskService;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, ProjectService projectService, TaskService taskService) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, @Lazy ProjectService projectService, TaskService taskService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.projectService = projectService;
