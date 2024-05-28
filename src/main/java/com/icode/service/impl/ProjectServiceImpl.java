@@ -11,6 +11,7 @@ import com.icode.repository.ProjectRepository;
 import com.icode.service.ProjectService;
 import com.icode.service.TaskService;
 import com.icode.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final TaskService taskService;
 
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper, UserService userService, UserMapper userMapper, TaskService taskService) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper, @Lazy UserService userService, UserMapper userMapper, TaskService taskService) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
         this.userService = userService;
@@ -88,7 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
 
-        UserDTO currentUserDto = userService.findByUserName("harold@manager.com"); // hardcoded before security is not implemented
+        UserDTO currentUserDto = userService.findByUserName("mng2214@gmail.com"); // hardcoded before security is not implemented
         User user = userMapper.convertToEntity(currentUserDto);
         List<Project> list = projectRepository.findAllByAssignedManager(user);
 

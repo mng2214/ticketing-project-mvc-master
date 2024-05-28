@@ -1,5 +1,6 @@
 package com.icode.config;
 
+import com.icode.service.SecurityService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,40 +28,53 @@ public class SecurityConfig {
 //        return new InMemoryUserDetailsManager(userList);
 //    }
 
+    private final SecurityService securityService;
+    private final AuthSuccessHandler authSuccessHandler;
+
+    public SecurityConfig(SecurityService securityService, AuthSuccessHandler authSuccessHandler) {
+        this.securityService = securityService;
+        this.authSuccessHandler = authSuccessHandler;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         return http
                 .authorizeRequests()
-
+//                .antMatchers("/user/**").hasRole("Admin")
                 .antMatchers("/user/**").hasAuthority("Admin")
                 .antMatchers("/project/**").hasAuthority("Manager")
                 .antMatchers("/task/employee/**").hasAuthority("Employee")
-
-                //   .antMatchers("/task/**").hasAnyAuthority("ROLE_EMPLOYEE")
-                //    .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .antMatchers("/task/**").hasAuthority("Manager")
+//                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
+//                .antMatchers("task/**").hasAuthority("ROLE_EMPLOYEE")
 
                 .antMatchers(
                         "/",
                         "/login",
                         "/fragments/**",
                         "/assets/**",
-                        "/images/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                        "/images/**"
+                ).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                //         .h ttpBasic()
+//                .httpBasic()
                 .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/welcome")
-                    .failureUrl("/login?error=true")
-                    .permitAll()
+                .loginPage("/login")
+//                    .defaultSuccessUrl("/welcome")
+                .successHandler(authSuccessHandler)
+                .failureUrl("/login?error=true")
+                .permitAll()
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
                 .and()
-                .build();
+                .rememberMe()
+                .tokenValiditySeconds(120)
+                .key("cydeo")
+                .userDetailsService(securityService)
+                .and().build();
+
     }
 }
