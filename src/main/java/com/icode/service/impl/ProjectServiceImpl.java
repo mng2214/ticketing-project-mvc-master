@@ -12,6 +12,7 @@ import com.icode.service.ProjectService;
 import com.icode.service.TaskService;
 import com.icode.service.UserService;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,7 +90,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
 
-        UserDTO currentUserDto = userService.findByUserName("mng2214@gmail.com"); // hardcoded before security is not implemented
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserDTO currentUserDto = userService.findByUserName(username);
         User user = userMapper.convertToEntity(currentUserDto);
         List<Project> list = projectRepository.findAllByAssignedManager(user);
 
